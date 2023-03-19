@@ -1,6 +1,6 @@
 # FlaskRESTapi
 
-Description: A backend service for application in which student selects a course from a list of courses and register for it with all endpoints for basic CRUD operations on registrations and courses database for administration purposes with proper JWT authentication.
+Description: A backend service for application in which student selects a course from a list of courses and register for it with all endpoints for basic CRUD operations on registrations and courses database for administration purposes with proper JWT authentication. Further documentation on use cases and errors are given in the pdf file.
 
 Documentation: Documentation for Flask REST API.pdf
 
