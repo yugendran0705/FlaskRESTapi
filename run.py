@@ -155,7 +155,9 @@ class Admin(Resource):
         result = Student.query.filter_by(registration_number=reg_number).first()
         if not result:
             abort(404, message="Student doesn't exist, cannot update")
-        
+        course=Course.query.filter_by(courses=args['course']).first()
+        if not course:
+            abort(404, message="Course doesn't exist")
         if args['name']:
             result.name = args['name']
         if args['age']:
@@ -172,12 +174,19 @@ class Admin(Resource):
     def delete(self):
         """Delete student and course details"""
         args = course_post_args.parse_args()
-        abort_if_course_doesnt_exist(args['courses'])
-        db.session.delete(Course.query.filter_by(courses=args['courses']).first())
-        abort_if_student_doesnt_exist(args['registration_number'])
-        db.session.delete(Student.query.filter_by(registration_number=args['registration_number']).first())
-        db.session.commit()
-        return '', 204
+        if args['courses'] is None and args['register_number'] is None:
+            #abort(404, message="Doesn't exist")
+            return '', 204
+        if args['courses'] :
+            abort_if_course_doesnt_exist(args['courses'])
+            db.session.delete(Course.query.filter_by(courses=args['courses']).first())
+            db.session.commit()
+            return '', 204
+        if args['register_number']:    
+            abort_if_student_doesnt_exist(args['registration_number'])
+            db.session.delete(Student.query.filter_by(registration_number=args['registration_number']).first())
+            db.session.commit()
+            return '', 204
     
 """Registering the resource"""
 api.add_resource(Admin, "/admin")   
@@ -233,4 +242,4 @@ app.register_blueprint(admin, url_prefix="/admin") # Registering the admin bluep
 #---------------------------------------------------------------  Main  -------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
