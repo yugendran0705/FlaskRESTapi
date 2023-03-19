@@ -72,14 +72,14 @@ Database:
 
 Models used in the project:
 -Student:
-  registration_number
-  name
-  age
-  course
-  password
+  -registration_number
+  -name
+  -age
+  -course
+  -password
   
 -Course:
-  courses
+  -courses
   
 The models can be expanded by including more attributes and used as per future requirements
 
