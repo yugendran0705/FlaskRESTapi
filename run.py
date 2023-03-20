@@ -242,4 +242,4 @@ app.register_blueprint(admin, url_prefix="/admin") # Registering the admin bluep
 #---------------------------------------------------------------  Main  -------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
